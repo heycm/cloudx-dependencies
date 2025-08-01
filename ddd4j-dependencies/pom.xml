@@ -19,11 +19,22 @@
     <spring-boot.version>3.3.13</spring-boot.version>
     <spring-cloud.version>2023.0.6</spring-cloud.version>
     <spring-cloud-alibaba.version>2023.0.3.3</spring-cloud-alibaba.version>
+    <slf4j-api.version>2.0.17</slf4j-api.version>
   </properties>
 
-  <!-- 统一依赖版本管理 -->
+  <!-- 统一依赖版本管理，越前面优先级越高 -->
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j-api.version}</version>
+      </dependency>
       <!-- Spring Boot -->
       <dependency>
         <groupId>org.springframework.boot</groupId>
