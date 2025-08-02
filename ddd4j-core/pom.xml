@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>cn.heycm.d3framework</groupId>
-    <artifactId>ddd4j</artifactId>
+    <artifactId>ddd4j-dependencies</artifactId>
     <version>1.0</version>
   </parent>
 
@@ -27,15 +27,4 @@
     </dependency>
   </dependencies>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>cn.heycm.d3framework</groupId>
-        <artifactId>ddd4j-dependencies</artifactId>
-        <version>1.0</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 </project>
