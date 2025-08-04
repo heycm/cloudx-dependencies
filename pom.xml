@@ -32,11 +32,12 @@
     <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
 
     <lombok.version>1.18.38</lombok.version>
-    <mapstruct.version>1.5.5.Final</mapstruct.version>
+    <slf4j-api.version>2.0.17</slf4j-api.version>
     <spring-boot.version>3.3.13</spring-boot.version>
     <spring-cloud.version>2023.0.6</spring-cloud.version>
     <spring-cloud-alibaba.version>2023.0.3.3</spring-cloud-alibaba.version>
-    <slf4j-api.version>2.0.17</slf4j-api.version>
+
+    <mapstruct.version>1.5.5.Final</mapstruct.version>
   </properties>
 
   <!-- 统一依赖版本管理，越前面优先级越高 -->
