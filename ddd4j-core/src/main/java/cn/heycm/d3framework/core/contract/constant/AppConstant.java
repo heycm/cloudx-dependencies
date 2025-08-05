@@ -1,4 +1,4 @@
-package com.cloudx.common.entity.constant;
+package cn.heycm.d3framework.core.contract.constant;
 
 /**
  * 系统全局常量池
