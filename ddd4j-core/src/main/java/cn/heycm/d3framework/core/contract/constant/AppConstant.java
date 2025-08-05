@@ -34,4 +34,10 @@ public interface AppConstant {
 
     // 请求签名
     String X_SIGNATURE = "X-Signature";
+
+    // 启动项目时 -Dcipher.aes.key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 指定 AES 加密密钥，否则使用默认密钥，可能会导致加解密失败
+    String AES_KEY = "cipher.aes.key";
+
+    // 启动项目时 -Dcipher.aes.iv=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 指定 AES 加密向量，否则使用默认向量，可能会导致加解密失败
+    String AES_IV = "cipher.aes.iv";
 }
