@@ -1,9 +1,10 @@
 package cn.heycm.d3framework.core.contract.exception;
 
-import cn.heycm.d3framework.core.contract.enums.IEnum;
 import cn.heycm.d3framework.core.contract.result.IR;
 import cn.heycm.d3framework.core.contract.result.ResultCode;
+import cn.heycm.d3framework.core.utils.StrKit;
 import java.io.Serializable;
+import lombok.Getter;
 
 /**
  * 业务业务异常
@@ -11,6 +12,7 @@ import java.io.Serializable;
  * @version 1.0
  * @since 2025/8/2 18:15
  */
+@Getter
 public class ServiceException extends RuntimeException {
 
     private final Serializable code;
@@ -25,13 +27,18 @@ public class ServiceException extends RuntimeException {
         this.code = code;
     }
 
-    public ServiceException(IEnum<Serializable> resultCode) {
+    public ServiceException(ResultCode resultCode) {
         super(resultCode.message());
         this.code = resultCode.code();
     }
 
-    public ServiceException(IR r) {
+    public ServiceException(IR<?> r) {
         super(r.getMessage());
         this.code = r.getCode();
+    }
+
+    public ServiceException(String template, Object... args) {
+        super(StrKit.format(template, args));
+        this.code = ResultCode.ERROR.code();
     }
 }
