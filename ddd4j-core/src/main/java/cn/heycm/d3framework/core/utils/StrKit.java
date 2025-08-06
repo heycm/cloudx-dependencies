@@ -70,7 +70,7 @@ public class StrKit {
         return sb.toString();
     }
 
-    public static String toString(Object obj) {
+    private static String toString(Object obj) {
         return switch (obj) {
             case null -> null;
             case String s -> s;
@@ -89,14 +89,14 @@ public class StrKit {
         };
     }
 
-    public static String bytesToString(byte[] data, Charset charset) {
+    private static String bytesToString(byte[] data, Charset charset) {
         if (data == null) {
             return null;
         }
         return charset == null ? new String(data) : new String(data, charset);
     }
 
-    public static String bytesToString(Byte[] data, Charset charset) {
+    private static String bytesToString(Byte[] data, Charset charset) {
         if (data == null) {
             return null;
         }
@@ -108,7 +108,7 @@ public class StrKit {
         return StrKit.bytesToString(bytes, charset);
     }
 
-    public static String bytesToString(ByteBuffer data, Charset charset) {
+    private static String bytesToString(ByteBuffer data, Charset charset) {
         if (data == null) {
             return null;
         }

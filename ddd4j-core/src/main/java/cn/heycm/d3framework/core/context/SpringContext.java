@@ -8,6 +8,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.PriorityOrdered;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 
 import java.util.Collection;
@@ -22,6 +24,7 @@ import java.util.concurrent.CountDownLatch;
  * @since 2025/8/1 23:18
  */
 @Slf4j
+@Order(PriorityOrdered.HIGHEST_PRECEDENCE) // 优先级最高，最先初始化
 public class SpringContext implements ApplicationContextAware, ApplicationRunner {
 
     /**
@@ -91,6 +94,12 @@ public class SpringContext implements ApplicationContextAware, ApplicationRunner
             return Collections.emptyList();
         }
         return beansOfType.values();
+    }
+
+    @SneakyThrows
+    public static <T> T getBeanAwait(@NonNull Class<T> clazz) {
+        APP_STARTED_SIGNAL.await();
+        return getApplicationContext().getBean(clazz);
     }
 
     public static Environment getEnv() {
