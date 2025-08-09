@@ -12,14 +12,89 @@
   <artifactId>ddd4j-bom</artifactId>
   <description>DDD4J聚合POM</description>
 
+  <properties>
+    <revision>1.0</revision>
+    <spring-boot.version>3.3.13</spring-boot.version>
+    <spring-cloud.version>2023.0.6</spring-cloud.version>
+    <spring-cloud-alibaba.version>2023.0.3.3</spring-cloud-alibaba.version>
+  </properties>
+
+
   <!-- DDD4J相关组件版本管理 -->
   <dependencyManagement>
     <dependencies>
+      <!-- ddd4j-core -->
       <dependency>
         <groupId>cn.heycm.d3framework</groupId>
         <artifactId>ddd4j-core</artifactId>
-        <version>1.0</version>
+        <version>${revision}</version>
+      </dependency>
+
+      <!-- Lombok -->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+      <!-- Slf4j -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j-api.version}</version>
+      </dependency>
+      <!-- Spring Boot -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Spring Cloud -->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Spring Cloud Alibaba -->
+      <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+        <version>${spring-cloud-alibaba.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Spring Boot 打包插件 -->
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring-boot.version}</version>
+          <configuration>
+            <excludes>
+              <exclude>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+              </exclude>
+            </excludes>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <!-- 把依赖打入生成的jar包 -->
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>

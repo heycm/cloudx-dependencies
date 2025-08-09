@@ -9,32 +9,18 @@
     <version>1.0</version>
   </parent>
 
-  <artifactId>ddd4j-core</artifactId>
-  <description>核心组件</description>
+  <artifactId>ddd4j-web</artifactId>
+  <description>Web组件</description>
 
   <dependencies>
+    <!-- ddd4j-core -->
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
+      <groupId>cn.heycm.d3framework</groupId>
+      <artifactId>ddd4j-core</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-autoconfigure</artifactId>
-    </dependency>
-    <!-- Jackson -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-    </dependency>
-    <!-- Servlet API -->
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <scope>provided</scope>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
   </dependencies>
 
