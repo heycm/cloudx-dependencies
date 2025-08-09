@@ -11,7 +11,9 @@
   <description>DDD4J Dependencies BOM</description>
 
   <modules>
+    <module>ddd4j-bom</module>
     <module>ddd4j-core</module>
+    <module>ddd4j-web</module>
   </modules>
 
   <properties>
