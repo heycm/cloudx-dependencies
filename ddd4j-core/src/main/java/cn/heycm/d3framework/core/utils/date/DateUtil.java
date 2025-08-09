@@ -32,7 +32,7 @@ public class DateUtil {
 
     public static DateTimeFormatter getDateTimeFormatter(String pattern) {
         DateTimeFormatter formatter = FORMATTER.getOrDefault(pattern, DateTimeFormatter.ofPattern(pattern));
-        Assert.notNull(formatter, "Invalid date format pattern");
+        Assert.notNull(formatter, "Invalid date format pattern: {}", pattern);
         FORMATTER.putIfAbsent(pattern, formatter);
         return formatter;
     }

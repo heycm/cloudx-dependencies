@@ -23,6 +23,18 @@ public final class Assert {
         }
     }
 
+    public static void isTrue(boolean expression, String errmsg, Object... args) {
+        if (!expression) {
+            throw new ServiceException(errmsg, args);
+        }
+    }
+
+    public static void isTrue(boolean expression, ResultCode resultCode) {
+        if (!expression) {
+            throw new ServiceException(resultCode);
+        }
+    }
+
     public static void isOk(IR<?> r) {
         if (r == null) {
             throw new ServiceException(ResultCode.ERROR.code(), "result is null");
