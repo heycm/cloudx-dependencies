@@ -6,4 +6,4 @@ package cn.heycm.d3framework.core.domain.model;
  * @version 1.0
  * @since 2025/6/28 19:38
  */
-public interface Entity<T extends Identifier> {}
+public interface Entity<ID extends Identifier> {}

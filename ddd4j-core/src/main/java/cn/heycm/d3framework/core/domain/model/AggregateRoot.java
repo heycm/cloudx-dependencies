@@ -7,6 +7,6 @@ package cn.heycm.d3framework.core.domain.model;
  * @version 1.0
  * @since 2025/3/22 20:12
  */
-public interface AggregateRoot<T extends Identifier> extends Entity<T> {
+public interface AggregateRoot<ID extends Identifier> extends Entity<ID> {
 
 }
