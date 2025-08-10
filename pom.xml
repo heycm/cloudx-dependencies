@@ -15,6 +15,7 @@
     <module>ddd4j-core</module>
     <module>ddd4j-web</module>
     <module>ddd4j-log</module>
+    <module>ddd4j-datasource</module>
   </modules>
 
   <properties>

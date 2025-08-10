@@ -13,6 +13,10 @@
   <description>Web组件</description>
 
   <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
     <!-- ddd4j-core -->
     <dependency>
       <groupId>cn.heycm.d3framework</groupId>

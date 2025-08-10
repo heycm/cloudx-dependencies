@@ -39,7 +39,7 @@ public class DataSourceItemPool {
     /**
      * 空闲连接的保活频率，默认2分钟，调用JDBC4.isValid()方法或执行connectionTestQuery
      */
-    private long keepAliveTime = 1800000;
+    private long keepaliveTime = 1800000;
 
     /**
      * 从连接池中获取连接的超时时间（毫秒）
@@ -52,9 +52,9 @@ public class DataSourceItemPool {
     private long validationTimeout = 500;
 
     /**
-     * 池中连接有效性测试语句，如果驱动程序支持JDBC4不要设置此属性，使用JDBC4.isValid()方法
+     * 池中连接有效性测试语句，如果驱动程序支持JDBC4不要设置此属性，使用JDBC4.isValid()方法，如果不支持可以使用 "select 1"
      */
-    private String connectionTestQuery = "select 1";
+    private String connectionTestQuery;
 
     /**
      * 池中连接自动提交事务，默认true
