@@ -1,6 +1,7 @@
 package cn.heycm.d3framework.localcache.wrapper;
 
 import lombok.Getter;
+import lombok.NonNull;
 
 /**
  * TTL缓存值
@@ -17,38 +18,17 @@ public class CacheValue<V> {
     private final V value;
 
     /**
-     * 过期时间
+     * 缓存有效期，单位纳秒
      */
-    private final long expireTime;
+    private final long ttlNanos;
 
-    public CacheValue(V value, long expireTime) {
+    public CacheValue(@NonNull V value, long ttlNanos) {
         this.value = value;
-        this.expireTime = expireTime <= 0 ? -1 : System.currentTimeMillis() + expireTime;
-    }
-
-    public static <V> CacheValue<V> of(V value, long expireTime) {
-        return new CacheValue<>(value, expireTime);
-    }
-
-    public boolean isExpired() {
-        return expireTime > 0 && System.currentTimeMillis() > expireTime;
-    }
-
-    @Override
-    public final int hashCode() {
-        return value.hashCode();
-    }
-
-    @Override
-    public final boolean equals(Object obj) {
-        if (obj instanceof CacheValue<?> other) {
-            return value.equals(other.value);
-        }
-        return value.equals(obj);
+        this.ttlNanos = ttlNanos > 0 ? ttlNanos : -1;
     }
 
     @Override
     public String toString() {
-        return "CacheValue[value: " + value + ", expireTime: " + expireTime + "]";
+        return "CacheValue[value: " + value + ", ttlNanos: " + ttlNanos + "]";
     }
 }
