@@ -17,6 +17,7 @@
     <module>ddd4j-log</module>
     <module>ddd4j-datasource</module>
     <module>ddd4j-local-cache</module>
+    <module>ddd4j-nacos</module>
   </modules>
 
   <properties>
