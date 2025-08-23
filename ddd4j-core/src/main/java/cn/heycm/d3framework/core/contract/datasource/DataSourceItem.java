@@ -70,7 +70,7 @@ public class DataSourceItem {
     /**
      * 连接池配置
      */
-    private DataSourceItemPool itemPool;
+    private DataSourceItemPool pool;
 
     /**
      * 获取jdbc连接地址

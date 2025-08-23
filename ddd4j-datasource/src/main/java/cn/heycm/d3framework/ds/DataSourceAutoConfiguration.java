@@ -1,7 +1,12 @@
 package cn.heycm.d3framework.ds;
 
+import cn.heycm.d3framework.core.contract.datasource.DataSourceItem;
 import cn.heycm.d3framework.ds.transaction.TransactionHelper;
+import cn.heycm.d3framework.ds.utils.DataSourceUtil;
 import javax.sql.DataSource;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -16,22 +21,26 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class DataSourceAutoConfiguration {
 
-
-    public DataSourceAutoConfiguration() {
-
+    @Bean
+    @ConfigurationProperties(prefix = "ddd4j.datasource")
+    public DataSourceItem dataSourceItem() {
+        return new DataSourceItem();
     }
 
     @Bean
-    public DataSource dataSource() {
-        return null;
+    @ConditionalOnProperty(name = "ddd4j.datasource.host")
+    public DataSource dataSource(DataSourceItem dataSourceItem) throws ClassNotFoundException {
+        return DataSourceUtil.createDataSource(dataSourceItem);
     }
 
     @Bean
+    @ConditionalOnBean(DataSource.class)
     public PlatformTransactionManager transactionManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean
+    @ConditionalOnBean(PlatformTransactionManager.class)
     public TransactionHelper transactionHelper(PlatformTransactionManager platformTransactionManager) {
         return new TransactionHelper(platformTransactionManager);
     }

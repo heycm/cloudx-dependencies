@@ -30,7 +30,7 @@ public class DataSourceUtil {
         dataSource.setJdbcUrl(item.getJdbcUrl());
         dataSource.setUsername(item.getUsername());
         dataSource.setPassword(item.getPassword());
-        DataSourceItemPool pool = item.getItemPool();
+        DataSourceItemPool pool = item.getPool();
         if (null != pool) {
             dataSource.setPoolName(pool.getPoolName());
             dataSource.setMaximumPoolSize(pool.getMaxPoolSize());
