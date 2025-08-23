@@ -1,14 +1,13 @@
 package cn.heycm.d3framework.localcache.cache;
 
+import cn.heycm.d3framework.localcache.wrapper.CacheExpiry;
 import cn.heycm.d3framework.localcache.wrapper.CacheValue;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.github.benmanes.caffeine.cache.Expiry;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.index.qual.NonNegative;
 import org.springframework.beans.factory.DisposableBean;
 
 /**
@@ -33,33 +32,12 @@ public class CaffeineCacheImpl implements LocalCache, DisposableBean {
 
     public CaffeineCacheImpl(long maximumSize) {
         this.cacheId = CACHE_ID.incrementAndGet();
-        this.cache = Caffeine.newBuilder()
-                // 最大缓存数量
-                .maximumSize(maximumSize)
-                // 缓存过期策略
-                .expireAfter(new Expiry<Object, CacheValue<Object>>() {
-                    @Override
-                    public long expireAfterCreate(Object key, CacheValue<Object> value, long currentTime) {
-                        // （创建）写操作后更新存活时间，单位纳秒，若设置过期时间<1则视为永不过期
-                        return value.getTtlNanos() > 0 ? value.getTtlNanos() : Long.MAX_VALUE;
-                    }
-
-                    @Override
-                    public long expireAfterUpdate(Object key, CacheValue<Object> value, long currentTime,
-                            @NonNegative long currentDuration) {
-                        // （更新）写操作后更新存活时间，单位纳秒，若设置过期时间<1则视为永不过期
-                        return value.getTtlNanos() > 0 ? value.getTtlNanos() : Long.MAX_VALUE;
-                    }
-
-                    @Override
-                    public long expireAfterRead(Object key, CacheValue<Object> value, long currentTime, @NonNegative long currentDuration) {
-                        // 读操作不改变过期时间
-                        return currentDuration;
-                    }
-                })
-                // 软引用，当内存不足时（OOM）, 会自动回收
-                .softValues().build();
-        this.cleaner = Thread.ofVirtual().name("CFC-Cleaner-" + cacheId).start(() -> {
+        this.cache = Caffeine.newBuilder().maximumSize(maximumSize) // 最大缓存数量
+                .expireAfter(new CacheExpiry()) // 缓存过期策略
+                .softValues() // 软引用，OOM时被回收
+                .build();
+        this.cleaner = Thread.ofVirtual().name("LC-Cleaner-" + cacheId).start(() -> {
+            log.info("LC-Cleaner-{} thread started.", cacheId);
             try {
                 while (!Thread.currentThread().isInterrupted()) {
                     // 主动触发 cache 过期机制
@@ -69,7 +47,7 @@ public class CaffeineCacheImpl implements LocalCache, DisposableBean {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             } finally {
-               log.info("CFC-Cleaner-{} thread stopped gracefully.", cacheId);
+                log.info("LC-Cleaner-{} thread stopped gracefully.", cacheId);
             }
         });
     }
@@ -123,16 +101,16 @@ public class CaffeineCacheImpl implements LocalCache, DisposableBean {
         cache.invalidateAll();
     }
 
+    @Override
+    public void destroy() throws Exception {
+        log.info("LocalCache-{} destroy...", cacheId);
+        close();
+    }
+
     /**
      * 主动关闭清理线程
      */
     public void close() {
         cleaner.interrupt();
-    }
-
-    @Override
-    public void destroy() throws Exception {
-        log.info("LocalCache destroy...");
-        close();
     }
 }
