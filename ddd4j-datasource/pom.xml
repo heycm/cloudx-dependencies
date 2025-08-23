@@ -49,6 +49,12 @@
       <artifactId>jakarta.servlet-api</artifactId>
       <scope>provided</scope>
     </dependency>
+    <!-- 微服务项目通过Nacos推送数据源/多租户数据源 -->
+    <dependency>
+      <groupId>cn.heycm.d3framework</groupId>
+      <artifactId>ddd4j-nacos</artifactId>
+      <version>1.0</version>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>
