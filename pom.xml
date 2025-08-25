@@ -19,6 +19,7 @@
     <module>ddd4j-local-cache</module>
     <module>ddd4j-nacos</module>
     <module>ddd4j-redis</module>
+    <module>ddd4j-mybatis</module>
   </modules>
 
   <properties>
