@@ -53,6 +53,36 @@
         <artifactId>ddd4j-core</artifactId>
         <version>${revision}</version>
       </dependency>
+      <dependency>
+        <groupId>cn.heycm.d3framework</groupId>
+        <artifactId>ddd4j-datasource</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.heycm.d3framework</groupId>
+        <artifactId>ddd4j-local-cache</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.heycm.d3framework</groupId>
+        <artifactId>ddd4j-log</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.heycm.d3framework</groupId>
+        <artifactId>ddd4j-nacos</artifactId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.heycm.d3framework</groupId>
+        <artifactId>ddd4j-redis</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.heycm.d3framework</groupId>
+        <artifactId>ddd4j-web</artifactId>
+        <version>1.0</version>
+      </dependency>
 
       <!-- Lombok -->
       <dependency>
