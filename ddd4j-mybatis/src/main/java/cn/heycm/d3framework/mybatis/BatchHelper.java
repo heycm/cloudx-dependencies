@@ -1,4 +1,4 @@
-package cn.heycm.d3framework.mybatis.batch;
+package cn.heycm.d3framework.mybatis;
 
 import java.util.Collection;
 import java.util.List;
@@ -11,18 +11,22 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import org.springframework.util.CollectionUtils;
 
 /**
- * 批处理Session
+ * SqlSession 批处理工具
  * @author heycm
  * @version 1.0
  * @since 2025/8/25 22:27
  */
-public class BatchHelper {
+public final class BatchHelper {
 
     private static final int DEFAULT_BATCH_SIZE = 1000;
 
     private static SqlSessionFactory sqlSessionFactory;
 
-    public BatchHelper(SqlSessionFactory sqlSessionFactory) {
+    private BatchHelper() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
+    static void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
         BatchHelper.sqlSessionFactory = sqlSessionFactory;
     }
 

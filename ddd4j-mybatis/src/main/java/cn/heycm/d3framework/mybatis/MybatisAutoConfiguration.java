@@ -1,6 +1,5 @@
 package cn.heycm.d3framework.mybatis;
 
-import cn.heycm.d3framework.mybatis.batch.BatchHelper;
 import cn.heycm.d3framework.mybatis.plugins.SQLMarkingInterceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -15,13 +14,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MybatisAutoConfiguration {
 
-    @Bean
-    public SQLMarkingInterceptor sqlMarkingInterceptor() {
-        return new SQLMarkingInterceptor();
+    public MybatisAutoConfiguration(SqlSessionFactory sqlSessionFactory) {
+        BatchHelper.setSqlSessionFactory(sqlSessionFactory);
     }
 
     @Bean
-    public BatchHelper batchHelper(SqlSessionFactory sqlSessionFactory) {
-        return new BatchHelper(sqlSessionFactory);
+    public SQLMarkingInterceptor sqlMarkingInterceptor() {
+        return new SQLMarkingInterceptor();
     }
 }
