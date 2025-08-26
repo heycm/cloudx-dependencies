@@ -27,6 +27,9 @@ public final class BatchHelper {
     }
 
     static void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+        if (sqlSessionFactory == null) {
+            throw new IllegalArgumentException("SqlSessionFactory is null.");
+        }
         BatchHelper.sqlSessionFactory = sqlSessionFactory;
     }
 
