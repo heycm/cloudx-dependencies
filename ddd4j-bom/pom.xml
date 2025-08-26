@@ -85,6 +85,11 @@
       </dependency>
       <dependency>
         <groupId>cn.heycm.d3framework</groupId>
+        <artifactId>ddd4j-uid</artifactId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.heycm.d3framework</groupId>
         <artifactId>ddd4j-web</artifactId>
         <version>${revision}</version>
       </dependency>

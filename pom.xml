@@ -20,6 +20,7 @@
     <module>ddd4j-nacos</module>
     <module>ddd4j-redis</module>
     <module>ddd4j-mybatis</module>
+    <module>ddd4j-uid</module>
   </modules>
 
   <properties>
