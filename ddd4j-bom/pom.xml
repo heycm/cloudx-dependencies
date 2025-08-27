@@ -65,6 +65,11 @@
       </dependency>
       <dependency>
         <groupId>cn.heycm.d3framework</groupId>
+        <artifactId>ddd4j-lock</artifactId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.heycm.d3framework</groupId>
         <artifactId>ddd4j-log</artifactId>
         <version>${revision}</version>
       </dependency>
