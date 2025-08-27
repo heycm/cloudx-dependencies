@@ -85,6 +85,11 @@
       </dependency>
       <dependency>
         <groupId>cn.heycm.d3framework</groupId>
+        <artifactId>ddd4j-openfeign</artifactId>
+        <version>${revision}</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.heycm.d3framework</groupId>
         <artifactId>ddd4j-redis</artifactId>
         <version>${revision}</version>
       </dependency>
