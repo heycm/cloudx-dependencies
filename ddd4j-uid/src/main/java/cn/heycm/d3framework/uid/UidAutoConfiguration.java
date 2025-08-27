@@ -6,6 +6,7 @@ import cn.heycm.d3framework.uid.service.UidService;
 import com.baidu.fsg.uid.UidGenerator;
 import com.baidu.fsg.uid.impl.CachedUidGenerator;
 import com.baidu.fsg.uid.worker.WorkerIdAssigner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2025/8/26 22:10
  */
 @Configuration
+@ConditionalOnProperty(name = "ddd4j.uid.worker-id")
 @EnableConfigurationProperties(UidProperties.class)
 public class UidAutoConfiguration {
 
