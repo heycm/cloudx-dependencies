@@ -9,10 +9,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class Jackson {
 
-    private static final String TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    private static final String DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    private static final String TIME_PATTERN = "HH:mm:ss";
     private static final String TIME_ZONE = "Asia/Shanghai";
 
     private Jackson() {
@@ -49,13 +53,16 @@ public final class Jackson {
         // 值为null字段不转换
         om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         // 统一日期格式：java.util.Date
-        om.setDateFormat(new SimpleDateFormat(TIME_PATTERN));
+        om.setDateFormat(new SimpleDateFormat(DATETIME_PATTERN));
         om.setTimeZone(TimeZone.getTimeZone(TIME_ZONE));
         // Java8时间支持：LocalDate、LocalDateTime、LocalTime
         JavaTimeModule javaTimeModule = new JavaTimeModule();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(TIME_PATTERN);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
         javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(dtf));
         javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(dtf));
+        dtf = DateTimeFormatter.ofPattern(TIME_PATTERN);
+        javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(dtf));
+        javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(dtf));
         om.registerModule(javaTimeModule);
 
         // 字节码增强模块
