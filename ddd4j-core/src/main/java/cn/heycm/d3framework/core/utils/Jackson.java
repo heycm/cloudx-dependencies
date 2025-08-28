@@ -1,6 +1,7 @@
 package cn.heycm.d3framework.core.utils;
 
 import cn.heycm.d3framework.core.contract.exception.JsonException;
+import cn.heycm.d3framework.core.utils.date.DateUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -16,7 +17,6 @@ import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -57,12 +57,10 @@ public final class Jackson {
         om.setTimeZone(TimeZone.getTimeZone(TIME_ZONE));
         // Java8时间支持：LocalDate、LocalDateTime、LocalTime
         JavaTimeModule javaTimeModule = new JavaTimeModule();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
-        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(dtf));
-        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(dtf));
-        dtf = DateTimeFormatter.ofPattern(TIME_PATTERN);
-        javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(dtf));
-        javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(dtf));
+        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateUtil.getDateTimeFormatter(DATETIME_PATTERN)));
+        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateUtil.getDateTimeFormatter(DATETIME_PATTERN)));
+        javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DateUtil.getDateTimeFormatter(TIME_PATTERN)));
+        javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateUtil.getDateTimeFormatter(TIME_PATTERN)));
         om.registerModule(javaTimeModule);
 
         // 字节码增强模块

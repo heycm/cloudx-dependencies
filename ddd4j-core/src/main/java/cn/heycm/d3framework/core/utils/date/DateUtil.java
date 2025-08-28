@@ -11,14 +11,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 日期工具类
- *
  * @author heycm
  * @version 1.0
  * @since 2024/11/15 22:26
  */
 public class DateUtil {
 
-    private DateUtil() {}
+    private DateUtil() {
+    }
 
     private static final ZoneId ZONE_ID = ZoneId.systemDefault();
 
@@ -32,7 +32,7 @@ public class DateUtil {
 
     public static DateTimeFormatter getDateTimeFormatter(String pattern) {
         DateTimeFormatter formatter = FORMATTER.getOrDefault(pattern, DateTimeFormatter.ofPattern(pattern));
-        Assert.notNull(formatter, "Invalid date format pattern: {}", pattern);
+        Assert.notNull(formatter, "Invalid DateTimeFormatter pattern: {}", pattern);
         FORMATTER.putIfAbsent(pattern, formatter);
         return formatter;
     }
@@ -61,12 +61,24 @@ public class DateUtil {
         return toLocalDateTime(date).format(getDateTimeFormatter(pattern));
     }
 
+    public static String format(Date date) {
+        return format(date, DateFormat.YYYY_MM_DD_HH_MM_SS);
+    }
+
     public static String format(LocalDateTime localDateTime, String pattern) {
         return localDateTime.format(getDateTimeFormatter(pattern));
     }
 
+    public static String format(LocalDateTime localDateTime) {
+        return format(localDateTime, DateFormat.YYYY_MM_DD_HH_MM_SS);
+    }
+
     public static String format(LocalDate localDate, String pattern) {
         return localDate.format(getDateTimeFormatter(pattern));
+    }
+
+    public static String format(LocalDate localDate) {
+        return format(localDate, DateFormat.YYYY_MM_DD);
     }
 
     public static Date toDate(String format, String pattern) {
