@@ -45,21 +45,21 @@ public class RequestInterceptor implements feign.RequestInterceptor {
     }
 
     private boolean needTransmit(String headerName) {
-        return AppConstant.TRACE_ID.equalsIgnoreCase(headerName)
-                || AppConstant.TOKEN_HEADER.equalsIgnoreCase(headerName)
-                || AppConstant.TERMINAL.equalsIgnoreCase(headerName)
+        return AppConstant.TOKEN_HEADER.equalsIgnoreCase(headerName)
+                || AppConstant.TENANT_ID.equalsIgnoreCase(headerName)
+                || AppConstant.TRACE_ID.equalsIgnoreCase(headerName)
                 || AppConstant.UID.equalsIgnoreCase(headerName)
-                || Optional.ofNullable(transferHeaderMatcher)
-                .map(matcher -> matcher.needTransmit(headerName)).orElse(false);
+                || AppConstant.TERMINAL.equalsIgnoreCase(headerName)
+                || Optional.ofNullable(transferHeaderMatcher).map(matcher -> matcher.needTransmit(headerName)).orElse(false);
     }
 
     private void setTraceId(RequestTemplate requestTemplate) {
         String traceId = MDC.get(AppConstant.TRACE_ID);
-        if (traceId != null) {
+        if (traceId != null && !requestTemplate.headers().containsKey(AppConstant.TRACE_ID)) {
             requestTemplate.header(AppConstant.TRACE_ID, traceId);
         }
         String uid = MDC.get(AppConstant.UID);
-        if (uid != null) {
+        if (uid != null && !requestTemplate.headers().containsKey(AppConstant.UID)) {
             requestTemplate.header(AppConstant.UID, uid);
         }
     }
