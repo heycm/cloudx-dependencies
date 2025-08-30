@@ -9,51 +9,46 @@
     <version>1.0</version>
   </parent>
 
-  <artifactId>ddd4j-datasource</artifactId>
-  <description>数据源组件</description>
+  <artifactId>ddd4j-sentinel</artifactId>
+  <description>Sentinel组件</description>
 
   <dependencies>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-    </dependency>
-    <!-- ddd4j-core -->
     <dependency>
       <groupId>cn.heycm.d3framework</groupId>
       <artifactId>ddd4j-core</artifactId>
     </dependency>
-    <!-- Spring Data JDBC -->
+    <!-- Sentinel -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jdbc</artifactId>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
     </dependency>
-    <!-- 连接驱动 -->
     <dependency>
-      <groupId>com.mysql</groupId>
-      <artifactId>mysql-connector-j</artifactId>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
     </dependency>
-    <!-- 切面编程 -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-aop</artifactId>
+      <groupId>com.alibaba.csp</groupId>
+      <artifactId>sentinel-datasource-nacos</artifactId>
     </dependency>
-    <!-- Web -->
+
+    <!-- Web环境：仅为编译和条件判断使用 -->
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
       <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
-    <!-- Servlet API -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webflux</artifactId>
+      <scope>provided</scope>
+      <optional>true</optional>
+    </dependency>
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
       <scope>provided</scope>
-    </dependency>
-    <!-- 微服务项目通过Nacos推送数据源/多租户数据源 -->
-    <dependency>
-      <groupId>cn.heycm.d3framework</groupId>
-      <artifactId>ddd4j-nacos</artifactId>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 

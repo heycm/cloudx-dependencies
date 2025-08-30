@@ -23,6 +23,7 @@
     <module>ddd4j-uid</module>
     <module>ddd4j-lock</module>
     <module>ddd4j-openfeign</module>
+    <module>ddd4j-sentinel</module>
   </modules>
 
   <properties>
