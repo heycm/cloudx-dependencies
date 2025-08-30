@@ -24,6 +24,7 @@
     <module>ddd4j-lock</module>
     <module>ddd4j-openfeign</module>
     <module>ddd4j-sentinel</module>
+    <module>ddd4j-shortid</module>
   </modules>
 
   <properties>
