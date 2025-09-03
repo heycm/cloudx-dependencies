@@ -37,32 +37,30 @@ public class ShortIdService {
     public ShortId acquireId(String idKey, int maxRetry) {
         maxRetry = Math.max(maxRetry, 1);
         while (maxRetry-- > 0) {
-            ShortIdPO shortIdPO = findIdKey(idKey);
-            if (shortIdPO == null) {
+            ShortId shortId = findIdKey(idKey);
+            if (shortId == null) {
                 throw new ShortIdException("Failed to acquire next ShortId: IdKey Not Found.");
             }
-            int row = incrShortId(shortIdPO);
+            int row = incrShortId(shortId);
             if (row > 0) {
-                ShortId shortId = new ShortId();
-                shortId.setIdKey(shortIdPO.getIdKey());
-                shortId.setNextId(shortIdPO.getIdValue() + 1);
-                shortId.setMaxId(shortIdPO.getIdValue() + shortIdPO.getIdStep());
+                shortId.setNextId(shortId.getIdValue() + 1);
+                shortId.setMaxId(shortId.getIdValue() + shortId.getIdStep());
                 return shortId;
             }
         }
         throw new ShortIdException("Failed to acquire next ShortId.");
     }
 
-    private int incrShortId(ShortIdPO shortIdPO) {
+    private int incrShortId(ShortId shortId) {
         String sql = "UPDATE ddd4j_short_id SET id_value = id_value + id_step WHERE id_key = ? AND id_value = ?";
-        return jdbcTemplate.update(sql, shortIdPO.getIdKey(), shortIdPO.getIdValue());
+        return jdbcTemplate.update(sql, shortId.getIdKey(), shortId.getIdValue());
     }
 
-    private ShortIdPO findIdKey(String idKey) {
+    private ShortId findIdKey(String idKey) {
         String sql = "SELECT id_key, id_value, id_step FROM ddd4j_short_id WHERE id_key = ?";
         try {
             return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
-                ShortIdPO shortId = new ShortIdPO();
+                ShortId shortId = new ShortId();
                 shortId.setIdKey(rs.getString("id_key"));
                 shortId.setIdValue(rs.getInt("id_value"));
                 shortId.setIdStep(rs.getInt("id_step"));

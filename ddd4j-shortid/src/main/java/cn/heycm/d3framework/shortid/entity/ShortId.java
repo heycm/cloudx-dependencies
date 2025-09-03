@@ -14,6 +14,16 @@ public class ShortId {
     private String idKey;
 
     /**
+     * ID值
+     */
+    private Integer idValue;
+
+    /**
+     * 步长
+     */
+    private Integer idStep;
+
+    /**
      * 下一个ID
      */
     private int nextId;
@@ -31,6 +41,22 @@ public class ShortId {
         this.idKey = idKey;
     }
 
+    public Integer getIdValue() {
+        return idValue;
+    }
+
+    public void setIdValue(Integer idValue) {
+        this.idValue = idValue;
+    }
+
+    public Integer getIdStep() {
+        return idStep;
+    }
+
+    public void setIdStep(Integer idStep) {
+        this.idStep = idStep;
+    }
+
     public int getNextId() {
         return nextId;
     }
@@ -45,10 +71,5 @@ public class ShortId {
 
     public void setMaxId(int maxId) {
         this.maxId = maxId;
-    }
-
-    @Override
-    public String toString() {
-        return "ShortId{" + "idKey='" + idKey + '\'' + ", nextId=" + nextId + ", maxId=" + maxId + '}';
     }
 }

@@ -20,7 +20,9 @@ public class ShortIdAutoConfiguration {
     @Bean
     @ConditionalOnBean(JdbcTemplate.class)
     public ShortIdService shortIdService(JdbcTemplate jdbcTemplate) {
-        return new ShortIdService(jdbcTemplate);
+        ShortIdService shortIdService = new ShortIdService(jdbcTemplate);
+        ShortIdGenerator.setShortIdService(shortIdService);
+        return shortIdService;
     }
 
     @Bean
