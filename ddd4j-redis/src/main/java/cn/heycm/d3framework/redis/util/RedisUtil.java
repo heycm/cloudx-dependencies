@@ -11,30 +11,28 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisNode;
 import org.springframework.data.redis.connection.RedisSentinelConfiguration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
-import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.util.StringUtils;
-import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisUtil {
 
-    /**
-     * Jedis连接池
-     */
-    public static JedisClientConfiguration createJedisConf(RedisProperties properties) {
-        RedisProperties.Pool pool = properties.getJedis().getPool();
-        JedisPoolConfig poolConfig = new JedisPoolConfig();
-        poolConfig.setMaxIdle(pool.getMaxIdle());
-        poolConfig.setMinIdle(pool.getMinIdle());
-        poolConfig.setMaxTotal(pool.getMaxActive());
-        poolConfig.setMaxWait(pool.getMaxWait());
-        poolConfig.setTestOnBorrow(true);
-        poolConfig.setTestOnReturn(false);
-        poolConfig.setTestWhileIdle(true);
-        return JedisClientConfiguration.builder().usePooling().poolConfig(poolConfig).and().readTimeout(properties.getTimeout()).build();
-    }
+    // /**
+    //  * Jedis连接池
+    //  */
+    // public static JedisClientConfiguration createJedisConf(RedisProperties properties) {
+    //     RedisProperties.Pool pool = properties.getJedis().getPool();
+    //     JedisPoolConfig poolConfig = new JedisPoolConfig();
+    //     poolConfig.setMaxIdle(pool.getMaxIdle());
+    //     poolConfig.setMinIdle(pool.getMinIdle());
+    //     poolConfig.setMaxTotal(pool.getMaxActive());
+    //     poolConfig.setMaxWait(pool.getMaxWait());
+    //     poolConfig.setTestOnBorrow(true);
+    //     poolConfig.setTestOnReturn(false);
+    //     poolConfig.setTestWhileIdle(true);
+    //     return JedisClientConfiguration.builder().usePooling().poolConfig(poolConfig).and().readTimeout(properties.getTimeout()).build();
+    // }
 
     /**
      * 单点Redis
