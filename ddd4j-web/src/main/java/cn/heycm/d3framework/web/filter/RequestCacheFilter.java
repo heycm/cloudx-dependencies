@@ -7,6 +7,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -22,9 +23,17 @@ public class RequestCacheFilter extends OncePerRequestFilter {
 
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
+    @Value("${ddd4j.web.api-cache.enable:true}")
+    private boolean enable;
+
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        if (!enable) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         if (this.skipWrapper(request)) {
             filterChain.doFilter(request, response);
             return;

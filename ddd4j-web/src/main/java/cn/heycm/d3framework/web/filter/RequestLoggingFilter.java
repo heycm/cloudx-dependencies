@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StopWatch;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -25,9 +26,16 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Slf4j
 public class RequestLoggingFilter extends OncePerRequestFilter {
 
+    @Value("${ddd4j.web.api-log.enable:true}")
+    private boolean enable;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        if (!enable) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         if (!(request instanceof CachedRequestWrapper requestWrapper) || !(response instanceof CachedResponseWrapper responseWrapper)) {
             filterChain.doFilter(request, response);
             return;
