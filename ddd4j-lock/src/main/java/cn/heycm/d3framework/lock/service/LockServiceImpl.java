@@ -50,16 +50,17 @@ public class LockServiceImpl implements LockService {
     @Override
     public void release() {
         RLock lock = LOCK.get();
-        if (lock != null && lock.isLocked() && lock.isHeldByCurrentThread()) {
-            LOCK.remove();
+        if (lock == null) {
+            return;
+        }
+        LOCK.remove();
+        if (lock.isLocked() && lock.isHeldByCurrentThread()) {
             lock.unlock();
             if (log.isDebugEnabled()) {
                 log.debug("lock key [{}] release.", lock.getName());
             }
             return;
         }
-        if (lock != null) {
-            log.warn("lock key [{}] is invalid, not need to release.", lock.getName());
-        }
+        log.warn("lock key [{}] is invalid, not need to release.", lock.getName());
     }
 }
