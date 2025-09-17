@@ -1,0 +1,2 @@
+com.github.heycm.cloudx.core.config.CoreAutoConfiguration
+com.github.heycm.cloudx.core.domain.DomainAutoConfiguration

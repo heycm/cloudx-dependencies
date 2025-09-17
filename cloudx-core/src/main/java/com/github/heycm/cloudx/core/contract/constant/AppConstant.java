@@ -1,0 +1,43 @@
+package com.github.heycm.cloudx.core.contract.constant;
+
+/**
+ * 系统全局常量池
+ * @author heycm
+ * @version 1.0
+ * @since 2025/3/22 19:07
+ */
+public interface AppConstant {
+
+    // 链路ID
+    String TRACE_ID = "TraceId";
+
+    // 用户ID
+    String UID = "UID";
+
+    // 请求头Token
+    String TOKEN_HEADER = "Authorization";
+
+    // Token前缀
+    String TOKEN_PREFIX = "Bearer ";
+
+    // 来源终端
+    String TERMINAL = "Terminal";
+
+    // 请求头租户ID
+    String TENANT_ID = "TenantId";
+
+    // 请求时间戳
+    String X_TIMESTAMP = "X-Timestamp";
+
+    // 请求随机字符
+    String X_NONCE = "X-Nonce";
+
+    // 请求签名
+    String X_SIGNATURE = "X-Signature";
+
+    // 启动项目时 -Dcipher.aes.key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 指定 AES 加密密钥，否则使用默认密钥，可能会导致加解密失败
+    String AES_KEY = "cipher.aes.key";
+
+    // 启动项目时 -Dcipher.aes.iv=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 指定 AES 加密向量，否则使用默认向量，可能会导致加解密失败
+    String AES_IV = "cipher.aes.iv";
+}

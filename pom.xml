@@ -4,27 +4,27 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>cn.heycm.d3framework</groupId>
-  <artifactId>ddd4j-dependencies</artifactId>
+  <groupId>com.github.heycm</groupId>
+  <artifactId>cloudx-dependencies</artifactId>
   <version>1.0</version>
   <packaging>pom</packaging>
-  <description>DDD4J Dependencies BOM</description>
+  <description>CloudX Dependencies</description>
 
   <modules>
-    <module>ddd4j-bom</module>
-    <module>ddd4j-core</module>
-    <module>ddd4j-web</module>
-    <module>ddd4j-log</module>
-    <module>ddd4j-datasource</module>
-    <module>ddd4j-local-cache</module>
-    <module>ddd4j-nacos</module>
-    <module>ddd4j-redis</module>
-    <module>ddd4j-mybatis</module>
-    <module>ddd4j-uid</module>
-    <module>ddd4j-lock</module>
-    <module>ddd4j-openfeign</module>
-    <module>ddd4j-sentinel</module>
-    <module>ddd4j-shortid</module>
+    <module>cloudx-bom</module>
+    <module>cloudx-core</module>
+    <module>cloudx-web</module>
+    <module>cloudx-log</module>
+    <module>cloudx-datasource</module>
+    <module>cloudx-local-cache</module>
+    <module>cloudx-nacos</module>
+    <module>cloudx-redis</module>
+    <module>cloudx-mybatis</module>
+    <module>cloudx-uid</module>
+    <module>cloudx-lock</module>
+    <module>cloudx-openfeign</module>
+    <module>cloudx-sentinel</module>
+    <module>cloudx-shortid</module>
   </modules>
 
   <properties>

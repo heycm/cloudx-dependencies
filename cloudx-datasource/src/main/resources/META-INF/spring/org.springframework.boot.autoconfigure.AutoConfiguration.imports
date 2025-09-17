@@ -1,0 +1,2 @@
+com.github.heycm.cloudx.ds.DataSourceAutoConfiguration
+com.github.heycm.cloudx.ds.TenantDataSourceAutoConfiguration
