@@ -47,8 +47,13 @@
     <lombok.version>1.18.38</lombok.version>
     <slf4j-api.version>2.0.17</slf4j-api.version>
     <mapstruct.version>1.5.5.Final</mapstruct.version>
-  </properties>
+    <smart-doc.version>3.0.9</smart-doc.version>
 
+    <!-- Spring版本 -->
+    <spring-boot.version>3.2.4</spring-boot.version>
+    <spring-cloud.version>2023.0.1</spring-cloud.version>
+    <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
+  </properties>
 
   <!-- 构建插件管理 -->
   <build>
@@ -183,6 +188,49 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
           <version>${maven-install-plugin.version}</version>
+        </plugin>
+
+        <!-- Spring Boot 打包插件 -->
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring-boot.version}</version>
+          <configuration>
+            <excludes>
+              <exclude>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+              </exclude>
+            </excludes>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <!-- 把依赖打入生成的jar包 -->
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <!-- Smart-doc 插件 -->
+        <plugin>
+          <groupId>com.ly.smart-doc</groupId>
+          <artifactId>smart-doc-maven-plugin</artifactId>
+          <version>${smart-doc.version}</version>
+          <configuration>
+            <configFile>${basedir}/src/main/resources/smart-doc.json</configFile>
+            <projectName>${project.description}</projectName>
+            <includes>
+              <include>cn.heycm.*</include>
+            </includes>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>html</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>

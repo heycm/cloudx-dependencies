@@ -13,15 +13,8 @@
   <description>CloudX Dependencies BOM</description>
 
   <properties>
-    <revision>1.0</revision>
-
-    <spring-boot.version>3.2.4</spring-boot.version>
-    <spring-cloud.version>2023.0.1</spring-cloud.version>
-    <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
     <spring-cloud-bootstrap.version>4.1.2</spring-cloud-bootstrap.version>
     <spring-boot-admin.version>3.3.6</spring-boot-admin.version>
-
-    <smart-doc.version>3.0.9</smart-doc.version>
 
     <mysql-connector.version>8.3.0</mysql-connector.version>
     <commons-pool2.version>2.12.0</commons-pool2.version>
@@ -47,71 +40,71 @@
   <!-- 依赖统一版本管理 -->
   <dependencyManagement>
     <dependencies>
-      <!-- cloudx-core -->
+      <!-- 优先本项目组件 -->
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-core</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-datasource</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-local-cache</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-lock</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-log</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-mybatis</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-nacos</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-openfeign</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-redis</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-sentinel</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-shortid</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-uid</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-web</artifactId>
-        <version>${revision}</version>
+        <version>1.0</version>
       </dependency>
 
       <!-- Lombok -->
@@ -378,53 +371,4 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-        <!-- Spring Boot 打包插件 -->
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>${spring-boot.version}</version>
-          <configuration>
-            <excludes>
-              <exclude>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-              </exclude>
-            </excludes>
-          </configuration>
-          <executions>
-            <execution>
-              <goals>
-                <!-- 把依赖打入生成的jar包 -->
-                <goal>repackage</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <!-- Smart-doc 插件 -->
-        <plugin>
-          <groupId>com.ly.smart-doc</groupId>
-          <artifactId>smart-doc-maven-plugin</artifactId>
-          <version>${smart-doc.version}</version>
-          <configuration>
-            <configFile>${basedir}/src/main/resources/smart-doc.json</configFile>
-            <projectName>${project.description}</projectName>
-            <includes>
-              <include>cn.heycm.*</include>
-            </includes>
-          </configuration>
-          <executions>
-            <execution>
-              <goals>
-                <goal>html</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>

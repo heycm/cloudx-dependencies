@@ -17,7 +17,7 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
-    <!-- cloudx-core -->
+    <!-- ddd4j-core -->
     <dependency>
       <groupId>com.github.heycm</groupId>
       <artifactId>cloudx-core</artifactId>
