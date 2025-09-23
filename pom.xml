@@ -25,6 +25,7 @@
     <module>cloudx-openfeign</module>
     <module>cloudx-sentinel</module>
     <module>cloudx-shortid</module>
+    <module>cloudx-mq</module>
   </modules>
 
   <properties>
