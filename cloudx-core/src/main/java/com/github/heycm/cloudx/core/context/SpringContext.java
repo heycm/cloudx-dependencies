@@ -63,7 +63,7 @@ public class SpringContext implements ApplicationContextAware, ApplicationRunner
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         // APP 启动完成信号
         APP_STARTED_SIGNAL.countDown();
     }
@@ -76,19 +76,41 @@ public class SpringContext implements ApplicationContextAware, ApplicationRunner
         return APPLICATION_CONTEXT;
     }
 
+    /**
+     * 按类型获取 Bean
+     * @param clazz Bean 类型
+     * @param <T>   Bean 类型
+     * @return Bean
+     */
     public static <T> T getBean(@NonNull Class<T> clazz) {
         return getApplicationContext().getBean(clazz);
     }
 
+    /**
+     * 按名称获取bean
+     * @param name bean名称
+     * @return bean
+     */
     @SuppressWarnings("unchecked")
     public static <T> T getBean(@NonNull String name) {
         return (T) getApplicationContext().getBean(name);
     }
 
+    /**
+     * 按名称和类型获取bean
+     * @param name  bean名称
+     * @param clazz bean类型
+     * @return bean
+     */
     public static <T> T getBean(@NonNull String name, @NonNull Class<T> clazz) {
         return getApplicationContext().getBean(name, clazz);
     }
 
+    /**
+     * 获取所有指定类型的Bean
+     * @param clazz Bean类型
+     * @return
+     */
     public static <T> Collection<T> getBeans(@NonNull Class<T> clazz) {
         Map<String, T> beansOfType = getApplicationContext().getBeansOfType(clazz);
         if (beansOfType.isEmpty()) {
@@ -97,12 +119,10 @@ public class SpringContext implements ApplicationContextAware, ApplicationRunner
         return beansOfType.values();
     }
 
-    @SneakyThrows
-    public static <T> T getBeanAwait(@NonNull Class<T> clazz) {
-        APP_STARTED_SIGNAL.await();
-        return getApplicationContext().getBean(clazz);
-    }
-
+    /**
+     * 获取环境变量
+     * @return Environment
+     */
     public static Environment getEnv() {
         return getApplicationContext().getEnvironment();
     }
