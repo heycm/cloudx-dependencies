@@ -17,7 +17,7 @@ public class VirtualThread {
     public static final ExecutorService EXECUTOR;
 
     static {
-        ThreadFactory factory = Thread.ofVirtual().name("vThread-", 1).factory();
+        ThreadFactory factory = Thread.ofVirtual().name("VThread-", 1).factory();
         EXECUTOR = Executors.newThreadPerTaskExecutor(factory);
     }
 

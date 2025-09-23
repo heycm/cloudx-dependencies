@@ -8,6 +8,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.core.PriorityOrdered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
@@ -104,5 +105,13 @@ public class SpringContext implements ApplicationContextAware, ApplicationRunner
 
     public static Environment getEnv() {
         return getApplicationContext().getEnvironment();
+    }
+
+    /**
+     * 发布事件
+     * @param event 事件
+     */
+    public static void publish(ApplicationEvent event) {
+        getApplicationContext().publishEvent(event);
     }
 }
