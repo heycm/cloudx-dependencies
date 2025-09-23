@@ -13,6 +13,10 @@ public class TenantContextHolder {
 
     private static final ThreadLocal<String> TENANT = new ThreadLocal<>();
 
+    /**
+     * 设置租户ID
+     * @param tenantId 租户ID
+     */
     public static void setTenantId(String tenantId) {
         if (exists()) {
             log.debug("Tenant context switches from [{}] to [{}]", TenantContextHolder.getTenantId(), tenantId);
@@ -22,10 +26,17 @@ public class TenantContextHolder {
         TENANT.set(tenantId);
     }
 
+    /**
+     * 获取租户ID
+     * @return 租户ID
+     */
     public static String getTenantId() {
         return TENANT.get();
     }
 
+    /**
+     * 清除租户ID
+     */
     public static void clear() {
         if (exists()) {
             log.debug("Tenant context [{}] removed.", TenantContextHolder.getTenantId());
@@ -35,6 +46,10 @@ public class TenantContextHolder {
         }
     }
 
+    /**
+     * 判断租户ID是否存在
+     * @return true-存在
+     */
     public static boolean exists() {
         return TENANT.get() != null;
     }
