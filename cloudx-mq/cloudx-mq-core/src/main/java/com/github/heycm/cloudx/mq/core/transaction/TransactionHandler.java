@@ -12,7 +12,7 @@ import com.github.heycm.cloudx.mq.core.event.Event;
 public interface TransactionHandler {
 
     /**
-     * 执行本地事务，向 Broker 提交 Half 消息成功后执行本地事务
+     * 向 Broker 提交 Half 消息成功后，执行本地事务
      * @param event 消息事件
      * @return 本地事务状态
      */
