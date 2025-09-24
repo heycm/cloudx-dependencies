@@ -16,6 +16,7 @@
   <modules>
     <module>cloudx-mq-core</module>
     <module>cloudx-rocketmq-producer</module>
+    <module>cloudx-rocketmq-consumer</module>
   </modules>
 
   <dependencies>
