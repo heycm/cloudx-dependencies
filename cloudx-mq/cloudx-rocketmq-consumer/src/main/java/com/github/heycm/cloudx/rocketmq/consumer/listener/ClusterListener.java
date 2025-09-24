@@ -9,7 +9,7 @@ import org.apache.rocketmq.spring.core.RocketMQPushConsumerLifecycleListener;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
- * 普通消息监听
+ * 普通消息监听，集群处理，并行消费
  * @author heycm
  * @version 1.0
  * @since 2025/9/24 11:48
