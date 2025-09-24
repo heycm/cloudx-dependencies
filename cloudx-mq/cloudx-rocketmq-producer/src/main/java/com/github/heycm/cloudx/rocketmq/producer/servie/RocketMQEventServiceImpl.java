@@ -1,12 +1,10 @@
 package com.github.heycm.cloudx.rocketmq.producer.servie;
 
-import com.github.heycm.cloudx.mq.core.callback.EventSendCallback;
 import com.github.heycm.cloudx.mq.core.contract.Constant;
 import com.github.heycm.cloudx.mq.core.event.Event;
-import com.github.heycm.cloudx.mq.core.service.EventService;
-import com.github.heycm.cloudx.rocketmq.producer.callback.SendCallbackWrapper;
 import com.github.heycm.cloudx.rocketmq.producer.transaction.TransactionHandlerManager;
 import org.apache.rocketmq.client.producer.LocalTransactionState;
+import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.SendStatus;
 import org.apache.rocketmq.client.producer.TransactionListener;
@@ -74,24 +72,21 @@ public class RocketMQEventServiceImpl implements EventService {
     }
 
     @Override
-    public void pushAsync(Event event, EventSendCallback callback) {
+    public void pushAsync(Event event, SendCallback sendCallback) {
         String topic = buildTopicWithTags(event);
-        SendCallbackWrapper sendCallback = new SendCallbackWrapper(callback);
         rocketMQTemplate.asyncSend(topic, MessageBuilder.withPayload(event).build(), sendCallback);
     }
 
     @Override
-    public void pushDelayAsync(Event event, EventSendCallback callback) {
+    public void pushDelayAsync(Event event, SendCallback sendCallback) {
         String topic = buildTopicWithTags(event);
-        SendCallbackWrapper sendCallback = new SendCallbackWrapper(callback);
         rocketMQTemplate.asyncSend(topic, MessageBuilder.withPayload(event).build(), sendCallback, event.getTimeout(), event.getDelay());
     }
 
     @Override
-    public void pushOrderlyAsync(Event event, EventSendCallback callback) {
+    public void pushOrderlyAsync(Event event, SendCallback sendCallback) {
         String topic = event.getTopic() + Constant.ORDERLY_SUFFIX;
         topic = buildTopicWithTags(topic, event.getTags());
-        SendCallbackWrapper sendCallback = new SendCallbackWrapper(callback);
         rocketMQTemplate.asyncSendOrderly(topic, MessageBuilder.withPayload(event).build(), event.getHash(), sendCallback,
                 event.getTimeout());
     }

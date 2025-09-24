@@ -1,7 +1,7 @@
-package com.github.heycm.cloudx.mq.core.service;
+package com.github.heycm.cloudx.rocketmq.producer.servie;
 
-import com.github.heycm.cloudx.mq.core.callback.EventSendCallback;
 import com.github.heycm.cloudx.mq.core.event.Event;
+import org.apache.rocketmq.client.producer.SendCallback;
 
 /**
  * 事件推送服务
@@ -48,23 +48,23 @@ public interface EventService {
 
     /**
      * 异步推送事件
-     * @param event    事件
-     * @param callback 回调
+     * @param event        事件
+     * @param sendCallback 发送结果回调
      */
-    void pushAsync(Event event, EventSendCallback callback);
+    void pushAsync(Event event, SendCallback sendCallback);
 
     /**
      * 异步推送延迟事件
-     * @param event    事件
-     * @param callback 回调
+     * @param event        事件
+     * @param sendCallback 发送结果回调
      */
-    void pushDelayAsync(Event event, EventSendCallback callback);
+    void pushDelayAsync(Event event, SendCallback sendCallback);
 
     /**
      * 异步推送顺序事件
-     * @param event    事件
-     * @param callback 回调
+     * @param event        事件
+     * @param sendCallback 发送结果回调
      */
-    void pushOrderlyAsync(Event event, EventSendCallback callback);
+    void pushOrderlyAsync(Event event, SendCallback sendCallback);
 
 }

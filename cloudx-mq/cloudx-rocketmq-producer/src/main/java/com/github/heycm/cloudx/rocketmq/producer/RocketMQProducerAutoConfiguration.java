@@ -1,12 +1,12 @@
 package com.github.heycm.cloudx.rocketmq.producer;
 
-import com.github.heycm.cloudx.mq.core.callback.DefaultEventSendCallback;
-import com.github.heycm.cloudx.mq.core.callback.EventSendCallback;
-import com.github.heycm.cloudx.mq.core.service.EventService;
 import com.github.heycm.cloudx.mq.core.transaction.DefaultTransactionHandler;
 import com.github.heycm.cloudx.mq.core.transaction.TransactionHandler;
+import com.github.heycm.cloudx.rocketmq.producer.callback.DefaultSendCallback;
+import com.github.heycm.cloudx.rocketmq.producer.servie.EventService;
 import com.github.heycm.cloudx.rocketmq.producer.servie.RocketMQEventServiceImpl;
 import com.github.heycm.cloudx.rocketmq.producer.transaction.LocalTransactionListener;
+import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.TransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -40,8 +40,8 @@ public class RocketMQProducerAutoConfiguration {
      */
     @Bean
     @Primary
-    public EventSendCallback eventSendCallback() {
-        return new DefaultEventSendCallback();
+    public SendCallback sendCallback() {
+        return new DefaultSendCallback();
     }
 
     /**
