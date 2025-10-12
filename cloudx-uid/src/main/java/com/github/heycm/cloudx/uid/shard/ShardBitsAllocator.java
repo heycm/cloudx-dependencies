@@ -1,7 +1,5 @@
 package com.github.heycm.cloudx.uid.shard;
 
-import com.baidu.fsg.uid.utils.DateUtils;
-import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.util.Assert;
@@ -138,34 +136,5 @@ public class ShardBitsAllocator {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
-
-    public static void main(String[] args) {
-
-        long epochSeconds = TimeUnit.MILLISECONDS.toSeconds(DateUtils.parseByDayPattern("2025-01-01").getTime());
-
-        long currentSec = System.currentTimeMillis() / 1000;
-
-        ShardBitsAllocator allocator = new ShardBitsAllocator(30, 10, 6, 17);
-
-        System.out.println("allocator = " + allocator);
-
-        long currentDeltaSeconds = currentSec - epochSeconds;
-        System.out.println("currentDeltaSeconds = " + currentDeltaSeconds);
-
-        long allocate = allocator.allocate(currentDeltaSeconds, 1, 1, 0);
-
-        for (int i = 0; i < 10; i++) {
-            long id = allocate + i;
-            System.out.println("id  = " + id + ", bit = " + Long.toBinaryString(id));
-
-            long rid = id;
-            long mask = allocator.getMaxShardId() << allocator.getShardIdShift();
-            rid &= ~mask;
-            rid |= ((long) i << allocator.getShardIdShift()) & mask;
-
-            System.out.println("rid = " + rid + ", bit = " + Long.toBinaryString(rid));
-
-        }
     }
 }

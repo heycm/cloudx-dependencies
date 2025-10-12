@@ -53,7 +53,7 @@ public class DefaultShardUidGenerator implements ShardUidGenerator, Initializing
             throw new RuntimeException("Worker id " + workerId + " exceeds the max " + shardBitsAllocator.getMaxWorkerId());
         }
 
-        LOGGER.info("Initialized bits(1, {}, {}, {}) for workerID:{}", timeBits, workerBits, seqBits, workerId);
+        LOGGER.info("Initialized bits(1, {}, {}, {}, {}) for workerID:{}", timeBits, workerBits, shardBits, seqBits, workerId);
     }
 
     @Override
@@ -101,6 +101,11 @@ public class DefaultShardUidGenerator implements ShardUidGenerator, Initializing
          * 假设 shardBits = 4 -> shardFactor & (2^4 - 1) == shardFactor % 16，就是用分片因子对总分片数量取模
          */
         return shardFactor & shardBitsAllocator.getMaxShardId();
+    }
+
+    @Override
+    public long getUID() throws UidGenerateException {
+        return getUID(0L);
     }
 
     @Override

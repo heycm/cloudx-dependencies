@@ -1,5 +1,6 @@
 package com.github.heycm.cloudx.uid.shard;
 
+import com.baidu.fsg.uid.UidGenerator;
 import com.baidu.fsg.uid.exception.UidGenerateException;
 
 /**
@@ -8,7 +9,7 @@ import com.baidu.fsg.uid.exception.UidGenerateException;
  * @version 1.0
  * @since 2025/10/11 22:08
  */
-public interface ShardUidGenerator {
+public interface ShardUidGenerator extends UidGenerator {
 
     /**
      * 获取下一个ID
