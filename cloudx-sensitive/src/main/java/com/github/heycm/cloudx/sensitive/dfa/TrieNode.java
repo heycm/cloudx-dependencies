@@ -1,4 +1,4 @@
-package com.github.heycm.sensitive.dfa;
+package com.github.heycm.cloudx.sensitive.dfa;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

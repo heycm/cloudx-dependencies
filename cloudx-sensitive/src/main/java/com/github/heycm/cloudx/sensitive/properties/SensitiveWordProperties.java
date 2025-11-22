@@ -1,4 +1,4 @@
-package com.github.heycm.sensitive.properties;
+package com.github.heycm.cloudx.sensitive.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

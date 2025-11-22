@@ -1,9 +1,9 @@
-package com.github.heycm.sensitive.dfa;
+package com.github.heycm.cloudx.sensitive.dfa;
 
 import lombok.Data;
 
 /**
- * DFA字典词
+ * DFA字典词检索结果
  * @author heycm
  * @version 1.0
  * @since 2025/11/22 20:53

@@ -1,4 +1,4 @@
-package com.github.heycm.sensitive.dfa;
+package com.github.heycm.cloudx.sensitive.dfa;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -12,8 +12,6 @@ import org.springframework.util.StringUtils;
  * @since 2025/11/22 14:10
  */
 public class DfaTrie {
-
-    private static final String WORD_REPLACEMENT = "*";
 
     /**
      * 根节点
@@ -114,20 +112,11 @@ public class DfaTrie {
 
     /**
      * 查找并替换文本中的字典词
-     * @param text 待检测文本
-     * @return 过滤后的文本
-     */
-    public String filter(String text) {
-        return filter(text, WORD_REPLACEMENT);
-    }
-
-    /**
-     * 查找并替换文本中的字典词
      * @param text        待检测文本
      * @param replacement 替换的字符
      * @return 过滤后的文本
      */
-    private String filter(String text, String replacement) {
+    public String filter(String text, String replacement) {
         // 查找所有字典词
         LinkedList<DfaWord> words = findAll(text);
         if (words.isEmpty()) {
@@ -137,7 +126,6 @@ public class DfaTrie {
         // LinkedList 为双向链表，逆序遍历时间复杂度为O(n)，但要使用专门的倒序迭代器，若使用 fori 逆序循环，时间复杂度为O(n^2)
         Iterator<DfaWord> iterator = words.descendingIterator();
         StringBuilder result = new StringBuilder(text);
-        replacement = replacement == null ? WORD_REPLACEMENT : replacement;
         while (iterator.hasNext()) {
             DfaWord word = iterator.next();
             String placeholder = replacement.repeat(word.getEnd() - word.getStart());
