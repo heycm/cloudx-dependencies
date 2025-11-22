@@ -26,6 +26,7 @@
     <module>cloudx-sentinel</module>
     <module>cloudx-shortid</module>
     <module>cloudx-mq</module>
+    <module>cloudx-sensitive</module>
   </modules>
 
   <properties>

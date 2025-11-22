@@ -88,6 +88,11 @@
       </dependency>
       <dependency>
         <groupId>com.github.heycm</groupId>
+        <artifactId>cloudx-sensitive</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.heycm</groupId>
         <artifactId>cloudx-sentinel</artifactId>
         <version>1.0</version>
       </dependency>
